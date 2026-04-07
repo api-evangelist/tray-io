@@ -9,13 +9,13 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - AI Agents
   - API Aggregation
-  - Integration
   - Automation
+  - Connectors
+  - Integration
   - iPaaS
   - Workflow Automation
-  - AI Agents
-  - Connectors
 url: >-
   https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -32,10 +32,10 @@ apis:
     humanURL: https://tray.ai
     baseURL: https://tray.io/
     tags:
-      - Integration
-      - Automation
-      - iPaaS
       - API Management
+      - Automation
+      - Integration
+      - iPaaS
     properties:
       - type: Documentation
         url: https://tray.ai/documentation
