@@ -1,0 +1,225 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Tray.io Platform API"
+  description: >-
+    The Tray.io Platform API provides programmatic REST access to Tray's
+    connectors, authentication management, trigger subscriptions, user and
+    workspace administration, and project lifecycle operations.
+  tags:
+    - Automation
+    - Connectors
+    - Integration
+    - iPaaS
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRAY_IO_BEARER_TOKEN: TRAY_IO_BEARER_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: tray-io-platform
+      baseUri: https://api.tray.io/core/v1
+      description: "Tray.io Platform REST API for connectors, authentications, triggers, users, and workspaces."
+      authentication:
+        type: bearer
+        token: "{{TRAY_IO_BEARER_TOKEN}}"
+      resources:
+        - name: connectors
+          path: /connectors
+          description: "Discover and invoke Tray.io service connectors"
+          operations:
+            - name: list-connectors
+              method: GET
+              description: "Returns all available connectors from Tray's library"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-connector-version
+              method: GET
+              description: "Get details and operations of a specific connector version"
+              inputParameters:
+                - name: connectorName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Connector name (e.g., salesforce)"
+                - name: connectorVersion
+                  in: path
+                  type: string
+                  required: true
+                  description: "Connector version (e.g., 10.1)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: call-connector
+              method: POST
+              description: "Execute a connector operation against a third-party service"
+              inputParameters:
+                - name: connectorName
+                  in: path
+                  type: string
+                  required: true
+                - name: connectorVersion
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  operation: "{{tools.operation}}"
+                  authId: "{{tools.authId}}"
+                  input: "{{tools.input}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: authentications
+          path: /authentications
+          description: "Manage third-party service authentications"
+          operations:
+            - name: list-authentications
+              method: GET
+              description: "List all stored authentications"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-authentication
+              method: POST
+              description: "Create a new service authentication"
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  serviceEnvironmentId: "{{tools.serviceEnvironmentId}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-authentication
+              method: DELETE
+              description: "Delete a service authentication"
+              inputParameters:
+                - name: authenticationId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: triggers
+          path: /triggers
+          description: "Manage trigger subscriptions"
+          operations:
+            - name: list-triggers
+              method: GET
+              description: "List all available triggers"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-subscription
+              method: POST
+              description: "Create a trigger subscription for real-time events"
+              body:
+                type: json
+                data:
+                  triggerName: "{{tools.triggerName}}"
+                  connectorName: "{{tools.connectorName}}"
+                  connectorVersion: "{{tools.connectorVersion}}"
+                  authId: "{{tools.authId}}"
+                  input: "{{tools.input}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: workspaces
+          path: /workspaces
+          description: "Manage organization workspaces"
+          operations:
+            - name: list-workspaces
+              method: GET
+              description: "List all workspaces in the organization"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: users
+          path: /users
+          description: "Manage organization users"
+          operations:
+            - name: list-users
+              method: GET
+              description: "List all users in the organization"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: tray-io-platform-rest
+      resources:
+        - path: /v1/connectors
+          name: connectors
+          operations:
+            - method: GET
+              name: list-connectors
+              description: "List all available Tray.io connectors"
+              call: "tray-io-platform.list-connectors"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/authentications
+          name: authentications
+          operations:
+            - method: GET
+              name: list-authentications
+              description: "List all service authentications"
+              call: "tray-io-platform.list-authentications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: tray-io-platform-mcp
+      transport: http
+      tools:
+        - name: list-connectors
+          description: "List all Tray.io service connectors"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "tray-io-platform.list-connectors"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: call-connector
+          description: "Execute a Tray.io connector operation"
+          hints:
+            readOnly: false
+            openWorld: true
+          call: "tray-io-platform.call-connector"
+          outputParameters:
+            - type: object
+              mapping: "$."

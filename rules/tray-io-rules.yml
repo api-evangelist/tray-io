@@ -1,0 +1,72 @@
+extends: spectral:oas
+rules:
+  tray-io-operation-id-camel-case:
+    description: >-
+      Operation IDs should use camelCase naming convention consistent with
+      Tray.io API conventions (e.g., listConnectors, callConnector).
+    message: "Operation ID '{{value}}' should use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  tray-io-bearer-auth-required:
+    description: >-
+      All Tray.io API endpoints require Bearer token authentication.
+    message: "All operations require Bearer token authentication"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - required: ["security"]
+            - not:
+                required: ["security"]
+
+  tray-io-response-success-defined:
+    description: >-
+      All operations should define a successful response (200 or 204).
+    message: "Operation should define a 200 or 204 success response"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - required: ["200"]
+            - required: ["204"]
+
+  tray-io-401-defined:
+    description: All Tray.io operations should document the 401 Unauthorized response.
+    message: "Operation should define a 401 Unauthorized response"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["401"]
+
+  tray-io-description-required:
+    description: All operations should include a description.
+    message: "Operation should have a description"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: truthy
+
+  tray-io-tags-required:
+    description: All operations should have at least one tag.
+    message: "Operation should have at least one tag"
+    severity: warn
+    given: "$.paths[*][*].tags"
+    then:
+      function: length
+      functionOptions:
+        min: 1

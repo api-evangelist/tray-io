@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/json-schema/tray-io-authentication-schema.json",
+  "title": "Tray.io Authentication",
+  "description": "A stored authentication credential for a third-party service in the Tray.io platform.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique authentication identifier (UUID)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the authentication"
+    },
+    "serviceEnvironmentId": {
+      "type": "string",
+      "description": "The service environment this authentication is registered against"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "OAuth scopes associated with this authentication"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the authentication was created"
+    }
+  },
+  "required": ["id", "name", "serviceEnvironmentId"]
+}

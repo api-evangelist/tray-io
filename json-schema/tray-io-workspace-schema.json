@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/json-schema/tray-io-workspace-schema.json",
+  "title": "Tray.io Workspace",
+  "description": "An organizational subdivision within a Tray.io organization for separating environments or departments.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique workspace identifier (UUID)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the workspace"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the workspace and its purpose"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the workspace was created"
+    }
+  },
+  "required": ["id", "name"]
+}

@@ -19,7 +19,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/apis.yml
 created: '2026-03-26'
-modified: '2026-03-26'
+modified: '2026-05-03'
 specificationVersion: '0.19'
 apis:
   - aid: tray-io:tray-platform-api
@@ -29,18 +29,39 @@ apis:
       Tray's service connectors without using the Builder UI, enabling native
       integration of third-party APIs into applications without worrying about
       different protocols and data formats.
-    humanURL: https://tray.ai
-    baseURL: https://tray.io/
+    humanURL: https://developer.tray.ai/openapi/trayapi-introduction/
+    baseURL: https://api.tray.io/core/v1
     tags:
       - API Management
       - Automation
+      - Connectors
       - Integration
       - iPaaS
     properties:
       - type: Documentation
-        url: https://tray.ai/documentation
+        url: https://developer.tray.ai/openapi/trayapi-introduction/
       - type: Developer Portal
         url: https://developer.tray.ai/
+      - type: OpenAPI
+        url: openapi/tray-io-platform-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/tray-io-connector-schema.json
+      - type: JSONSchema
+        url: json-schema/tray-io-authentication-schema.json
+      - type: JSONSchema
+        url: json-schema/tray-io-workspace-schema.json
+      - type: JSONLD
+        url: json-ld/tray-io-context.jsonld
+      - type: JSONStructure
+        url: json-structure/tray-io-connector-structure.json
+      - type: Example
+        url: examples/tray-io-list-connectors-example.json
+      - type: Example
+        url: examples/tray-io-call-connector-example.json
+      - type: SpectralRuleset
+        url: rules/tray-io-rules.yml
+      - type: NaftikoCapability
+        url: capabilities/shared/platform-api.yaml
   - aid: tray-io:tray-embedded-api
     name: Tray.io Embedded API
     description: >-
@@ -55,6 +76,8 @@ apis:
     properties:
       - type: Documentation
         url: https://embedded-api-docs.tray.io/
+      - type: Developer Portal
+        url: https://developer.tray.ai/
 common:
   - type: Website
     url: https://tray.ai
@@ -68,6 +91,10 @@ common:
     url: https://www.linkedin.com/company/tray-io
   - type: X (Twitter)
     url: https://x.com/tray
+  - type: NaftikoCapability
+    url: capabilities/integration-platform.yaml
+  - type: Vocabulary
+    url: vocabulary/tray-io-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

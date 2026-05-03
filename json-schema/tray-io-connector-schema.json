@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/json-schema/tray-io-connector-schema.json",
+  "title": "Tray.io Connector",
+  "description": "A pre-built connector in the Tray.io platform that exposes the API operations of a third-party service.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The connector identifier (e.g., salesforce, slack, hubspot)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable display name of the connector"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the connector does"
+    },
+    "icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the connector icon image"
+    },
+    "versions": {
+      "type": "array",
+      "description": "Available versions of the connector",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Version identifier (e.g., '2.1', '4.0')"
+          },
+          "isLatest": {
+            "type": "boolean",
+            "description": "Whether this is the latest available version"
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "title"]
+}

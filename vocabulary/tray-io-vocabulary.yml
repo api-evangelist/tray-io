@@ -1,0 +1,91 @@
+title: Tray.io Vocabulary
+description: >-
+  Domain vocabulary for the Tray.io integration platform (now Tray.ai),
+  covering connectors, authentications, triggers, workspaces, and
+  workflow automation concepts.
+created: "2026-05-03"
+modified: "2026-05-03"
+
+terms:
+  - term: Connector
+    definition: >-
+      A pre-built integration module in Tray.io that exposes the operations
+      of a third-party service (e.g., Salesforce, Slack, HubSpot). Connectors
+      are versioned and expose operations via the Platform API.
+    tags:
+      - Core Concept
+      - Integration
+
+  - term: ConnectorVersion
+    definition: >-
+      A specific versioned release of a connector that defines the available
+      operations, input schemas, and output schemas at that version.
+    tags:
+      - Core Concept
+      - Versioning
+
+  - term: Operation
+    definition: >-
+      A single callable action within a connector version (e.g., "find_contacts"
+      in HubSpot). Operations define input and output JSON schemas and are
+      invoked via the Call Connector endpoint.
+    tags:
+      - Core Concept
+      - API
+
+  - term: Authentication
+    definition: >-
+      Stored credentials authorizing a connector to act on behalf of a user
+      against a third-party service. Identified by authId for use in connector calls.
+    tags:
+      - Security
+      - Credentials
+
+  - term: Trigger
+    definition: >-
+      A real-time event listener associated with a connector that pushes data
+      from third-party services into Tray.io workflows when events occur.
+    tags:
+      - Event Driven
+      - Real Time
+
+  - term: Subscription
+    definition: >-
+      An active registration of a trigger that listens for events from a
+      specific third-party service. Created via the /subscriptions endpoint.
+    tags:
+      - Event Driven
+      - Real Time
+
+  - term: Workspace
+    definition: >-
+      An organizational subdivision in Tray.io for separating environments
+      (dev, staging, production) or teams. Supports project environment promotion.
+    tags:
+      - Organization
+      - Administration
+
+  - term: Project
+    definition: >-
+      A portable collection of workflows and solutions in Tray.io that can be
+      exported and imported between workspaces for environment promotion.
+    tags:
+      - DevOps
+      - Lifecycle
+
+  - term: iPaaS
+    definition: >-
+      Integration Platform as a Service — the software category that Tray.io
+      (now Tray.ai) belongs to, providing cloud-native tools for connecting
+      enterprise applications without custom code.
+    tags:
+      - Platform Category
+
+  - term: ServiceEnvironment
+    definition: >-
+      A specific environment target for a third-party service, referenced by
+      serviceEnvironmentId when creating authentications. Separates production
+      from sandbox or staging service credentials.
+    tags:
+      - Configuration
+      - Security

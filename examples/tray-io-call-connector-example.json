@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.tray.io/core/v1/connectors/hubspot/versions/5.2/call",
+    "headers": {
+      "Authorization": "Bearer {bearer_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "operation": "find_contacts",
+      "authId": "auth-uuid-hubspot-123",
+      "input": {
+        "limit": 50,
+        "properties": ["firstname", "lastname", "email"]
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "results": [
+        {
+          "id": "1234",
+          "properties": {
+            "firstname": "Jane",
+            "lastname": "Smith",
+            "email": "jane.smith@example.com"
+          }
+        }
+      ],
+      "paging": {
+        "next": {
+          "after": "2",
+          "link": "https://api.hubapi.com/crm/v3/objects/contacts?after=2"
+        }
+      }
+    }
+  }
+}

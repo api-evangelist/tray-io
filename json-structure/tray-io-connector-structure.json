@@ -1,0 +1,35 @@
+{
+  "title": "Tray.io Connector Structure",
+  "description": "Structural documentation for Tray.io Connector and ConnectorVersion objects",
+  "type": "object",
+  "structure": {
+    "Connector": {
+      "name": { "type": "string", "description": "Connector identifier (e.g., salesforce)" },
+      "title": { "type": "string", "description": "Human-readable display name" },
+      "description": { "type": "string", "description": "What the connector does" },
+      "icon": { "type": "string", "format": "uri", "description": "Connector icon URL" },
+      "versions": {
+        "type": "array",
+        "items": {
+          "version": { "type": "string", "description": "Version string" },
+          "isLatest": { "type": "boolean", "description": "Whether this is the latest version" }
+        }
+      }
+    },
+    "ConnectorVersion": {
+      "name": { "type": "string" },
+      "version": { "type": "string" },
+      "title": { "type": "string" },
+      "operations": {
+        "type": "array",
+        "items": {
+          "name": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "inputSchema": { "type": "object" },
+          "outputSchema": { "type": "object" }
+        }
+      }
+    }
+  }
+}
