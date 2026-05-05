@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Tray.io
+providerId: tray-io
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - iPaaS
+description: Tray.io workflow execution and API rate limits per workspace.
+sources:
+  - https://tray.ai/pricing
+  - https://tray.io/documentation/api/
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Workflow concurrent executions
+    scope: workspace
+    metric: concurrent
+    limit: tier-based
+  - name: API requests
+    scope: workspace
+    metric: requests_per_minute
+    limit: 600
+    timeFrame: minute
+  - name: Webhook trigger
+    scope: workflow
+    metric: requests_per_second
+    limit: 100
+    timeFrame: second

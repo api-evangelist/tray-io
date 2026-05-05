@@ -1,11 +1,9 @@
 aid: tray-io
 name: Tray.io
-description: >-
-  Tray.io (now also known as Tray.ai) is an AI-ready integration platform as a
-  service (iPaaS) that enables businesses to integrate and automate workflows
-  across cloud applications using a visual editor, pre-built connectors, and
-  API-level access. The platform includes Merlin Agent Builder for building AI
-  agents and a Universal Automation Cloud for connecting data and systems.
+description: Tray.io (now also known as Tray.ai) is an AI-ready integration platform as a service (iPaaS)
+  that enables businesses to integrate and automate workflows across cloud applications using a visual
+  editor, pre-built connectors, and API-level access. The platform includes Merlin Agent Builder for building
+  AI agents and a Universal Automation Cloud for connecting data and systems.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -16,19 +14,16 @@ tags:
   - Integration
   - iPaaS
   - Workflow Automation
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/tray-io/refs/heads/main/apis.yml
 created: '2026-03-26'
-modified: '2026-05-03'
+modified: '2026-05-04'
 specificationVersion: '0.19'
 apis:
   - aid: tray-io:tray-platform-api
     name: Tray.io Platform API
-    description: >-
-      The Tray.io Platform API allows developers to leverage the power of
-      Tray's service connectors without using the Builder UI, enabling native
-      integration of third-party APIs into applications without worrying about
-      different protocols and data formats.
+    description: The Tray.io Platform API allows developers to leverage the power of Tray's service connectors
+      without using the Builder UI, enabling native integration of third-party APIs into applications
+      without worrying about different protocols and data formats.
     humanURL: https://developer.tray.ai/openapi/trayapi-introduction/
     baseURL: https://api.tray.io/core/v1
     tags:
@@ -64,10 +59,8 @@ apis:
         url: capabilities/shared/platform-api.yaml
   - aid: tray-io:tray-embedded-api
     name: Tray.io Embedded API
-    description: >-
-      The Tray.io Embedded API provides GraphQL-based APIs for embedding
-      Tray's automation capabilities into your own products, enabling end
-      users to configure and manage integrations directly.
+    description: The Tray.io Embedded API provides GraphQL-based APIs for embedding Tray's automation
+      capabilities into your own products, enabling end users to configure and manage integrations directly.
     humanURL: https://embedded-api-docs.tray.io/
     tags:
       - Embedded Integration
@@ -95,6 +88,27 @@ common:
     url: capabilities/integration-platform.yaml
   - type: Vocabulary
     url: vocabulary/tray-io-vocabulary.yml
+  - type: Features
+    data:
+      - 'Tray Advantage: foundational tier (custom)'
+      - 'Tray Advantage Plus: expanded services (custom)'
+      - Per-workspace + task pricing model
+      - Quarterly billing cycles
+      - Tasks = automated actions executed
+      - 650+ pre-built connectors
+      - Tray Embedded for SaaS vendors
+      - Merlin AI for workflow generation
+      - Visual workflow builder + JSONata data mapping
+      - Webhook triggers + scheduled triggers
+      - 'API requests: 600 req/min/workspace'
+      - 'Webhook trigger: 100 req/sec/workflow'
+      - Concurrent execution scales with tier
+      - Connector SDK for custom integrations
+      - SOC 2 Type 2 compliant
+      - HIPAA + GDPR-ready
+    sources:
+      - https://tray.ai/pricing
+    updated: '2026-05-04'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

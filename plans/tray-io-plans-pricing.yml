@@ -1,0 +1,55 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Tray.io (now Tray.ai)
+providerId: tray-io
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - iPaaS
+  - Integration
+  - AI Automation
+description: Tray.io tiered pricing across Tray Advantage / Advantage Plus (custom; per-workspace + tasks).
+sources:
+  - https://tray.ai/pricing
+plans:
+  - id: tray-advantage
+    name: Tray Advantage
+    type: enterprise
+    description: Custom subscription; foundational integration + automation.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Foundational integration + automation
+      - name: Per-workspace + task pricing
+      - name: Quarterly billing cycles
+  - id: tray-advantage-plus
+    name: Tray Advantage Plus
+    type: enterprise
+    description: Custom subscription; expanded services.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: All Advantage features
+      - name: Additional services
+      - name: Premium support
+      - name: Embedded iPaaS option
