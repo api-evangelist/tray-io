@@ -109,6 +109,22 @@ common:
     sources:
       - https://tray.ai/pricing
     updated: '2026-05-04'
+  - type: Integrations
+    url: https://tray.ai/company/partners
+integrations:
+  - name: Tray
+  - name: auctane
+  - name: avid property group
+  - name: eventbrite
+  - name: Life360
+  - name: Hackerone
+  - name: Headway
+  - name: IBM
+  - name: Mixpanel
+  - name: netapp
+  - name: outreach
+  - name: Udemy
+  - name: Zuora
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
