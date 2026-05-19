@@ -1,0 +1,121 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tray.io Platform API — Projects
+  description: 'Tray.io Platform API — Projects. 2 operations. Lead operation: Import Project. Self-contained Naftiko capability
+    covering one Tray Io business surface.'
+  tags:
+  - Tray Io
+  - Projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRAY_IO_API_KEY: TRAY_IO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-projects
+    baseUri: https://api.tray.io/core/v1
+    description: Tray.io Platform API — Projects business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-import
+      path: /projects/import
+      operations:
+      - name: importproject
+        method: POST
+        description: Import Project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-projectId-export
+      path: /projects/{projectId}/export
+      operations:
+      - name: exportproject
+        method: POST
+        description: Export Project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRAY_IO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-projects-rest
+    port: 8080
+    description: REST adapter for Tray.io Platform API — Projects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/import
+      name: projects-import
+      description: REST surface for projects-import.
+      operations:
+      - method: POST
+        name: importproject
+        description: Import Project
+        call: platform-projects.importproject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{projectid}/export
+      name: projects-projectid-export
+      description: REST surface for projects-projectId-export.
+      operations:
+      - method: POST
+        name: exportproject
+        description: Export Project
+        call: platform-projects.exportproject
+        with:
+          projectId: rest.projectId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tray.io Platform API — Projects. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: import-project
+      description: Import Project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-projects.importproject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: export-project
+      description: Export Project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-projects.exportproject
+      with:
+        projectId: tools.projectId
+      outputParameters:
+      - type: object
+        mapping: $.
