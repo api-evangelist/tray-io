@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateAuthenticationRequest",
+  "title": "CreateAuthenticationRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "serviceEnvironmentId"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "serviceEnvironmentId": {
+      "type": "string"
+    },
+    "userData": {
+      "type": "object"
+    },
+    "credentials": {
+      "type": "object"
+    }
+  }
+}

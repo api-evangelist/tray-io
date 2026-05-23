@@ -1,0 +1,241 @@
+{
+  "provider": "Tray.io",
+  "providerId": "tray-io",
+  "kind": "json-structure",
+  "description": "Structural overview of the Tray.io API surface; extracted from openapi/.",
+  "schemaCount": 12,
+  "operationCount": 16,
+  "schemas": [
+    {
+      "name": "Connector",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ConnectorVersion",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Operation",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CallConnectorRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "operation"
+      ]
+    },
+    {
+      "name": "Authentication",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CreateAuthenticationRequest",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "name",
+        "serviceEnvironmentId"
+      ]
+    },
+    {
+      "name": "Trigger",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CreateSubscriptionRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "triggerName",
+        "connectorName",
+        "connectorVersion",
+        "authId",
+        "input"
+      ]
+    },
+    {
+      "name": "Subscription",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "InviteUserRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "email"
+      ]
+    },
+    {
+      "name": "Workspace",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/connectors",
+      "operationId": "listConnectors",
+      "summary": "List Connectors",
+      "tags": [
+        "Connectors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/connectors/{connectorName}/versions/{connectorVersion}",
+      "operationId": "getConnectorVersion",
+      "summary": "Get Connector Version",
+      "tags": [
+        "Connectors"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/connectors/{connectorName}/versions/{connectorVersion}/call",
+      "operationId": "callConnector",
+      "summary": "Call Connector",
+      "tags": [
+        "Connectors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/authentications",
+      "operationId": "listAuthentications",
+      "summary": "List Authentications",
+      "tags": [
+        "Authentications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/authentications",
+      "operationId": "createAuthentication",
+      "summary": "Create Authentication",
+      "tags": [
+        "Authentications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/authentications/{authenticationId}",
+      "operationId": "getAuthentication",
+      "summary": "Get Authentication",
+      "tags": [
+        "Authentications"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/authentications/{authenticationId}",
+      "operationId": "deleteAuthentication",
+      "summary": "Delete Authentication",
+      "tags": [
+        "Authentications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/triggers",
+      "operationId": "listTriggers",
+      "summary": "List Triggers",
+      "tags": [
+        "Triggers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions",
+      "operationId": "createSubscription",
+      "summary": "Create Subscription",
+      "tags": [
+        "Triggers"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions/{subscriptionId}",
+      "operationId": "deleteSubscription",
+      "summary": "Delete Subscription",
+      "tags": [
+        "Triggers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "operationId": "listUsers",
+      "summary": "List Users",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/users/invite",
+      "operationId": "inviteUser",
+      "summary": "Invite User",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workspaces",
+      "operationId": "listWorkspaces",
+      "summary": "List Workspaces",
+      "tags": [
+        "Workspaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workspaces/{workspaceId}",
+      "operationId": "getWorkspace",
+      "summary": "Get Workspace",
+      "tags": [
+        "Workspaces"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{projectId}/export",
+      "operationId": "exportProject",
+      "summary": "Export Project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/import",
+      "operationId": "importProject",
+      "summary": "Import Project",
+      "tags": [
+        "Projects"
+      ]
+    }
+  ]
+}

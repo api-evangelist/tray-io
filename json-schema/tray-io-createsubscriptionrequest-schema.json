@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateSubscriptionRequest",
+  "title": "CreateSubscriptionRequest",
+  "type": "object",
+  "required": [
+    "triggerName",
+    "connectorName",
+    "connectorVersion",
+    "authId",
+    "input"
+  ],
+  "properties": {
+    "triggerName": {
+      "type": "string"
+    },
+    "connectorName": {
+      "type": "string"
+    },
+    "connectorVersion": {
+      "type": "string"
+    },
+    "authId": {
+      "type": "string"
+    },
+    "input": {
+      "type": "object"
+    }
+  }
+}

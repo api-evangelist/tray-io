@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Trigger",
+  "title": "Trigger",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "connectorName": {
+      "type": "string"
+    },
+    "inputSchema": {
+      "type": "object"
+    }
+  }
+}
