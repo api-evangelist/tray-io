@@ -1,0 +1,326 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tray.io Platform API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/connectors"
+          },
+          "docs": "Returns a list of all available connectors from Tray's connector library. Each connector exposes the API operations of a third-party service and can have multiple versions."
+        },
+        {
+          "info": {
+            "name": "Get Connector Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/connectors/:connectorName/versions/:connectorVersion",
+            "params": [
+              {
+                "name": "connectorName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the connector (e.g., salesforce, slack)"
+              },
+              {
+                "name": "connectorVersion",
+                "value": "",
+                "type": "path",
+                "description": "The version of the connector (e.g., 2.1)"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific connector version, including its available operations, input schemas, and output schemas."
+        },
+        {
+          "info": {
+            "name": "Call Connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/connectors/:connectorName/versions/:connectorVersion/call",
+            "params": [
+              {
+                "name": "connectorName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the connector"
+              },
+              {
+                "name": "connectorVersion",
+                "value": "",
+                "type": "path",
+                "description": "The version of the connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes an operation of a connector and returns the result. Billable endpoint. The input must conform to the input schema of the specified operation. Requires an authId for most operations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Authentications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/authentications"
+          },
+          "docs": "Retrieves a list of authentications associated with the authenticated user or organization."
+        },
+        {
+          "info": {
+            "name": "Create Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/authentications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user authentication for a third-party service in Tray.io. Returns an authentication ID usable with the Call Connector endpoint."
+        },
+        {
+          "info": {
+            "name": "Get Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/authentications/:authenticationId",
+            "params": [
+              {
+                "name": "authenticationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the authentication"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata associated with a user authentication by its ID."
+        },
+        {
+          "info": {
+            "name": "Delete Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tray.io/core/v1/authentications/:authenticationId",
+            "params": [
+              {
+                "name": "authenticationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the authentication"
+              }
+            ]
+          },
+          "docs": "Deletes a user authentication using the authentication ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/triggers"
+          },
+          "docs": "Returns a list of all available triggers from Tray's trigger library. Triggers allow receiving real-time data from third-party services."
+        },
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new trigger subscription using a trigger operation. The input must conform to the input schema of the trigger operation."
+        },
+        {
+          "info": {
+            "name": "Delete Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tray.io/core/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the subscription"
+              }
+            ]
+          },
+          "docs": "Deletes a trigger subscription by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/users"
+          },
+          "docs": "Retrieves a list of users within the Tray.io organization."
+        },
+        {
+          "info": {
+            "name": "Invite User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/users/invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invites a user to the organization by email address."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/workspaces"
+          },
+          "docs": "Retrieves a list of workspaces in the Tray.io organization. Workspaces separate environments such as dev and production."
+        },
+        {
+          "info": {
+            "name": "Get Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tray.io/core/v1/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific workspace by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/projects/:projectId/export",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Exports a project version for environment promotion."
+        },
+        {
+          "info": {
+            "name": "Import Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tray.io/core/v1/projects/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports a project version from exported data into a target workspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
