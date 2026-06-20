@@ -6,7 +6,7 @@ description: >-
   API-level access. The platform includes Merlin Agent Builder for building AI agents and a Universal Automation Cloud
   for connecting data and systems.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - AI Agents
 - API Aggregation
