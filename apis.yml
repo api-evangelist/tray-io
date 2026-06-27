@@ -37,7 +37,7 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.tray.ai/openapi/trayapi-introduction/
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.tray.ai/
   - type: OpenAPI
     url: openapi/tray-io-platform-api-openapi.yml
@@ -51,9 +51,9 @@ apis:
     url: json-ld/tray-io-context.jsonld
   - type: JSONStructure
     url: json-structure/tray-io-connector-structure.json
-  - type: Example
+  - type: Examples
     url: examples/tray-io-list-connectors-example.json
-  - type: Example
+  - type: Examples
     url: examples/tray-io-call-connector-example.json
   - type: SpectralRuleset
     url: rules/tray-io-rules.yml
@@ -70,7 +70,7 @@ apis:
   properties:
   - type: Documentation
     url: https://embedded-api-docs.tray.io/
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.tray.ai/
   - url: graphql/tray-io-graphql.md
     type: GraphQL
@@ -81,7 +81,7 @@ common:
   url: https://tray.ai
 - type: Documentation
   url: https://tray.ai/documentation
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developer.tray.ai/
 - type: Pricing
   url: https://tray.ai/pricing
