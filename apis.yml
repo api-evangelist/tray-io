@@ -75,6 +75,12 @@ apis:
   - url: graphql/tray-io-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/tray-io-trust-center.yml
+- type: DomainSecurity
+  url: security/tray-io-domain-security.yml
+- type: Authentication
+  url: authentication/tray-io-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/trayio
 - type: Website
@@ -114,6 +120,8 @@ common:
   updated: '2026-05-04'
 - type: Integrations
   url: https://tray.ai/company/partners
+- url: https://tray.ai/blog
+  type: Blog
 integrations:
 - name: Tray
 - name: auctane
