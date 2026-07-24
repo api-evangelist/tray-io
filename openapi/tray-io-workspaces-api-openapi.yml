@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: Tray.io Platform Authentications Workspaces API
+  description: The Tray.io Platform API (also known as the Connectivity API) provides direct programmatic REST access to Tray's connectors, authentication management, trigger subscriptions, user and workspace administration, and project/solution lifecycle operations. Enables developers to integrate Tray's 700+ pre-built service connectors into their own applications without using the Builder UI. All endpoints require Bearer token authentication.
+  version: 1.0.0
+  contact:
+    name: Tray.io Support
+    url: https://tray.ai
+  termsOfService: https://tray.ai/terms
+  license:
+    name: Proprietary
+    url: https://tray.ai/terms
+servers:
+- url: https://api.tray.io/core/v1
+  description: US Region (Default)
+- url: https://api.eu1.tray.io/core/v1
+  description: EU Region
+security:
+- bearerAuth: []
+tags:
+- name: Workspaces
+  description: Manage workspaces and workspace users. Workspaces divide an organization into sub-categories such as departments or dev/prod environments.
+paths:
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List Workspaces
+      description: Retrieves a list of workspaces in the Tray.io organization. Workspaces separate environments such as dev and production.
+      tags:
+      - Workspaces
+      responses:
+        '200':
+          description: Workspaces returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /workspaces/{workspaceId}:
+    get:
+      operationId: getWorkspace
+      summary: Get Workspace
+      description: Retrieves details for a specific workspace by its ID.
+      tags:
+      - Workspaces
+      parameters:
+      - name: workspaceId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workspace returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Workspace not found
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Bearer token missing or invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

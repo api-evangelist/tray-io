@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: Tray.io Platform Authentications API
+  description: The Tray.io Platform API (also known as the Connectivity API) provides direct programmatic REST access to Tray's connectors, authentication management, trigger subscriptions, user and workspace administration, and project/solution lifecycle operations. Enables developers to integrate Tray's 700+ pre-built service connectors into their own applications without using the Builder UI. All endpoints require Bearer token authentication.
+  version: 1.0.0
+  contact:
+    name: Tray.io Support
+    url: https://tray.ai
+  termsOfService: https://tray.ai/terms
+  license:
+    name: Proprietary
+    url: https://tray.ai/terms
+servers:
+- url: https://api.tray.io/core/v1
+  description: US Region (Default)
+- url: https://api.eu1.tray.io/core/v1
+  description: EU Region
+security:
+- bearerAuth: []
+tags:
+- name: Authentications
+  description: Create, retrieve, and delete third-party service authentications required by connectors to access external services.
+paths:
+  /authentications:
+    get:
+      operationId: listAuthentications
+      summary: List Authentications
+      description: Retrieves a list of authentications associated with the authenticated user or organization.
+      tags:
+      - Authentications
+      responses:
+        '200':
+          description: Authentications returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Authentication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAuthentication
+      summary: Create Authentication
+      description: Creates a new user authentication for a third-party service in Tray.io. Returns an authentication ID usable with the Call Connector endpoint.
+      tags:
+      - Authentications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAuthenticationRequest'
+      responses:
+        '200':
+          description: Authentication created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authentication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /authentications/{authenticationId}:
+    get:
+      operationId: getAuthentication
+      summary: Get Authentication
+      description: Retrieves metadata associated with a user authentication by its ID.
+      tags:
+      - Authentications
+      parameters:
+      - name: authenticationId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the authentication
+      responses:
+        '200':
+          description: Authentication details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authentication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Authentication not found
+    delete:
+      operationId: deleteAuthentication
+      summary: Delete Authentication
+      description: Deletes a user authentication using the authentication ID.
+      tags:
+      - Authentications
+      parameters:
+      - name: authenticationId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the authentication
+      responses:
+        '204':
+          description: Authentication deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Authentication not found
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Bearer token missing or invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+  schemas:
+    Authentication:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        serviceEnvironmentId:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+    CreateAuthenticationRequest:
+      type: object
+      required:
+      - name
+      - serviceEnvironmentId
+      properties:
+        name:
+          type: string
+        serviceEnvironmentId:
+          type: string
+        userData:
+          type: object
+        credentials:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

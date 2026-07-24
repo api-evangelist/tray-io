@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Tray.io Platform Authentications Users API
+  description: The Tray.io Platform API (also known as the Connectivity API) provides direct programmatic REST access to Tray's connectors, authentication management, trigger subscriptions, user and workspace administration, and project/solution lifecycle operations. Enables developers to integrate Tray's 700+ pre-built service connectors into their own applications without using the Builder UI. All endpoints require Bearer token authentication.
+  version: 1.0.0
+  contact:
+    name: Tray.io Support
+    url: https://tray.ai
+  termsOfService: https://tray.ai/terms
+  license:
+    name: Proprietary
+    url: https://tray.ai/terms
+servers:
+- url: https://api.tray.io/core/v1
+  description: US Region (Default)
+- url: https://api.eu1.tray.io/core/v1
+  description: EU Region
+security:
+- bearerAuth: []
+tags:
+- name: Users
+  description: Manage users and roles within your Tray.io organization.
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Retrieves a list of users within the Tray.io organization.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Users returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /users/invite:
+    post:
+      operationId: inviteUser
+      summary: Invite User
+      description: Invites a user to the organization by email address.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteUserRequest'
+      responses:
+        '200':
+          description: User invited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Bearer token missing or invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+  schemas:
+    InviteUserRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        workspaceId:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        status:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

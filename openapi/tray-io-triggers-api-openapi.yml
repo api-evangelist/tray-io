@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: Tray.io Platform Authentications Triggers API
+  description: The Tray.io Platform API (also known as the Connectivity API) provides direct programmatic REST access to Tray's connectors, authentication management, trigger subscriptions, user and workspace administration, and project/solution lifecycle operations. Enables developers to integrate Tray's 700+ pre-built service connectors into their own applications without using the Builder UI. All endpoints require Bearer token authentication.
+  version: 1.0.0
+  contact:
+    name: Tray.io Support
+    url: https://tray.ai
+  termsOfService: https://tray.ai/terms
+  license:
+    name: Proprietary
+    url: https://tray.ai/terms
+servers:
+- url: https://api.tray.io/core/v1
+  description: US Region (Default)
+- url: https://api.eu1.tray.io/core/v1
+  description: EU Region
+security:
+- bearerAuth: []
+tags:
+- name: Triggers
+  description: List available triggers and manage trigger subscriptions to receive real-time data from third-party services.
+paths:
+  /triggers:
+    get:
+      operationId: listTriggers
+      summary: List Triggers
+      description: Returns a list of all available triggers from Tray's trigger library. Triggers allow receiving real-time data from third-party services.
+      tags:
+      - Triggers
+      responses:
+        '200':
+          description: List of triggers returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trigger'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /subscriptions:
+    post:
+      operationId: createSubscription
+      summary: Create Subscription
+      description: Creates a new trigger subscription using a trigger operation. The input must conform to the input schema of the trigger operation.
+      tags:
+      - Triggers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        '200':
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /subscriptions/{subscriptionId}:
+    delete:
+      operationId: deleteSubscription
+      summary: Delete Subscription
+      description: Deletes a trigger subscription by its ID.
+      tags:
+      - Triggers
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the subscription
+      responses:
+        '204':
+          description: Subscription deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Subscription not found
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        triggerName:
+          type: string
+        connectorName:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    CreateSubscriptionRequest:
+      type: object
+      required:
+      - triggerName
+      - connectorName
+      - connectorVersion
+      - authId
+      - input
+      properties:
+        triggerName:
+          type: string
+        connectorName:
+          type: string
+        connectorVersion:
+          type: string
+        authId:
+          type: string
+        input:
+          type: object
+    Trigger:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        connectorName:
+          type: string
+        inputSchema:
+          type: object
+  responses:
+    Unauthorized:
+      description: Authentication failed. Bearer token missing or invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
