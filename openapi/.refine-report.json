@@ -1,0 +1,24 @@
+{
+  "provider": "tray-io",
+  "sources": [
+    "tray-io-authentications-api-openapi.yml",
+    "tray-io-connectors-api-openapi.yml",
+    "tray-io-projects-api-openapi.yml",
+    "tray-io-triggers-api-openapi.yml",
+    "tray-io-users-api-openapi.yml",
+    "tray-io-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "tray-io-authentications-api-openapi.yml",
+    "tray-io-connectors-api-openapi.yml",
+    "tray-io-projects-api-openapi.yml",
+    "tray-io-triggers-api-openapi.yml",
+    "tray-io-users-api-openapi.yml",
+    "tray-io-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
